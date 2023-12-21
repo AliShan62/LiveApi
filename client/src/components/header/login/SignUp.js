@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Typography, styled } from '@mui/material';
-
+import axios from  'axios'
 const Container = styled(Box)`
    margin:10%;
    text-align:center;
@@ -34,15 +34,35 @@ const init = {
     password: "",
     cpassword:""
 }
+
+const base_url="http://localhost:8000"
 const Signup = ({setLoginSignUp}) => {
     const [login, setLogin] = useState(init);
+    const [error, setError] = useState({color:"red",visibility:"hidden"});
+    const [message, setMessage] = useState("");
     const inputHandler = (e) => {
+        setError({color:"red",visibility:"hidden"})
         setLogin({ ...login, [e.target.name]: e.target.value })
     }
-    const submitHandler = (e) => {
-        e.preventDefault();
-        console.log(login)
+    const submitHandler =async (e) => {
+         e.preventDefault();
+        // console.log(login)
 
+        try{
+       const response=await axios.post(`${base_url}/signup`,login);
+             
+       console.log(response.data)
+       if(response.data.error){
+        setError({color:"red",visibility:"visible"})
+          setMessage(response.data.error)
+       }else{
+        setLoginSignUp(true)
+
+       }
+       
+        }catch(e){
+
+        }
     }
     return (
         <Container>
@@ -67,6 +87,9 @@ const Signup = ({setLoginSignUp}) => {
                             Already have an account ? please <span onClick={()=>{setLoginSignUp(true)}} style={{ cursor: 'pointer' }}>Login</span>
                         </Typography>
                     </DivBox>
+                    <span style={error}>
+                        {`Error:${message}`}
+                    </span>
                 </form>
             </InnerContainer>
 

@@ -5,35 +5,35 @@ export const signUpHandler = async (req, res) => {
     try {
         const { name, email, password, cpassword, userType } = req.body;
         if (!name) {
-            res.json({
+           return res.json({
                 error: "please enter name"
             });
         }
         if (!email) {
-            res.json({
+           return res.json({
                 error: "please enter email"
             });
         }
         if (!password || password.length < 6) {
-            res.json({
+           return res.json({
                 error: "password is requred atleast of 6 length"
             });
         }
         if (password !== cpassword) {
-            res.json({
+           return res.json({
                 error: "password mismatch"
             });
         }
         const user = await User.findOne({ email });
         if (user) {
-            res.json({
+           return res.json({
                 error: "user is existing"
             });
         }
         await User.create({
             name, email, password: await hashPassword(password), userType
         });
-        res.status(201).json(req.body);
+       return res.status(201).json(req.body);
 
     } catch (e) {
         console.log("internal error")
@@ -51,7 +51,7 @@ export const loginHandler = async (req, res) => {
         }
         const ismatch = await isMatch(password, user.password)
         if (!ismatch) {
-            res.json({
+           return res.json({
                 error: "password did not match"
             })
           
