@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState,useContext} from 'react'
 import { Box, Typography, styled } from '@mui/material';
 import axios from  'axios'
+import  { DataContext } from '../../context/DataProvider';
 const Container = styled(Box)`
    margin:10%;
    text-align:center;
@@ -40,6 +41,7 @@ const Signup = ({setLoginSignUp}) => {
     const [login, setLogin] = useState(init);
     const [error, setError] = useState({color:"red",visibility:"hidden"});
     const [message, setMessage] = useState("");
+    const  {account,setAccount}=useContext(DataContext);
     const inputHandler = (e) => {
         setError({color:"red",visibility:"hidden"})
         setLogin({ ...login, [e.target.name]: e.target.value })
@@ -49,7 +51,7 @@ const Signup = ({setLoginSignUp}) => {
         // console.log(login)
 
         try{
-       const response=await axios.post(`${base_url}/signup`,login);
+       const response=await axios.post(`${base_url}/signup`,{...login,userType:account.userType});
              
        console.log(response.data)
        if(response.data.error){

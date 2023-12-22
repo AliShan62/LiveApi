@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { Box, Typography, styled } from '@mui/material';
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import DataProvider, { DataContext } from '../../context/DataProvider';
 const Container = styled(Box)`
    margin:10%;
    text-align:center;
@@ -33,10 +35,13 @@ const init = {
     password: ""
 }
 const base_url="http://localhost:8000"
-const Login = ({  setLoginSignUp}) => {
+const Login = ({  setLoginSignUp,setOpen}) => {
     const [login, setLogin] = useState(init);
     const [error, setError] = useState({color:"red",visibility:"hidden"});
     const [message, setMessage] = useState("");
+    const {account,setAccount}=useContext(DataContext)
+    const navigate=useNavigate();
+    
     const inputHandler = (e) => {
         setError({color:"red",visibility:"hidden"})
         setLogin({ ...login, [e.target.name]: e.target.value })
@@ -49,8 +54,23 @@ const Login = ({  setLoginSignUp}) => {
                 setError({color:"red",visibility:"visible"})
                   setMessage(response.data.error)
                }else{
-                //setLoginSignUp(true)
-                
+                setAccount({...account,...login});
+               // setLoginSignUp(true)
+               console.log()
+               
+                if(account.userType=="admin" && response.data.userType=="admin"){
+                    navigate("/admin/dashboard")
+                    setLogin(init);
+                    setOpen(false);
+                    
+                }
+                if(account.userType="user" && response.data.userType=="user"){
+                    navigate("/user/dashboard")
+                    setLogin(init);
+                    setOpen(false);
+                }
+               
+                                
         
                }
 

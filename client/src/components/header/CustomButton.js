@@ -14,13 +14,13 @@ const LoginButton = styled(Button)`
 `;
 const CustomButton = () => {
   const [open,setOpen]=useState(false);
-  const {acoount,setAccount}=useContext(DataContext)
+  const {account,setAccount}=useContext(DataContext)
   const adminDialog=()=>{
-    setAccount({userType:"admin"})
+    setAccount({...account,userType:"admin"})
     setOpen(true)
   }
   const userDialog=()=>{
-    setAccount({userType:"user"})
+    setAccount({...account,userType:"user"})
     setOpen(true)
   }
   return (

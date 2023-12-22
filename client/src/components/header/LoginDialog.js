@@ -8,7 +8,7 @@ const LoginDialog = ({open,setOpen}) => {
     <Dialog  open={open} onClose={()=>{setOpen(false)}} >
         <Card style={{background:"rgb(29,69,107)"}}>
             {
-                loginSignUp ?(<Login setLoginSignUp={setLoginSignUp} />):( <Signup setLoginSignUp={setLoginSignUp}   />)
+                loginSignUp ?(<Login setLoginSignUp={setLoginSignUp} setOpen={setOpen} />):( <Signup setLoginSignUp={setLoginSignUp}   />)
             }
         
        
