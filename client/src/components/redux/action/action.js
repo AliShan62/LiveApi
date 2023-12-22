@@ -10,7 +10,7 @@ export const getMovies=()=>async(dispatch)=>{
         dispatch({type:GET_MOVIES_SUCCESS,payload:data})
 
     }catch(e){
-        dispatch({type:GET_MOVIES_Fail,payload:e.response})
+        dispatch({type:GET_MOVIES_FAIL,payload:e.response})
     }
 
 }

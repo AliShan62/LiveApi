@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import DataProvider from './components/context/DataProvider';
-
+import { Provider } from  "react-redux"
+import store from './components/redux/store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <DataProvider>
-    <App />
+      <Provider store={store} >
+      <App />
+      </Provider>
+    
     </DataProvider>
    
   </React.StrictMode>
