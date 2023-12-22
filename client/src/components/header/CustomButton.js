@@ -2,6 +2,7 @@ import React, { useState,useContext } from 'react'
 import { Button, Box, styled } from '@mui/material';
 import LoginDialog from './LoginDialog';
 import { DataContext } from '../context/DataProvider';
+import Proflie from './Proflie';
 
 
 const Wapper = styled(Box)`
@@ -25,13 +26,19 @@ const CustomButton = () => {
   }
   return (
     <Wapper>
-      <LoginButton style={{ marginRight: "5px" }} onClick={adminDialog} >
+     {
+      account.email ? (<Proflie account={account} setAccount={setAccount} />):(
+        <>
+        <LoginButton style={{ marginRight: "5px" }} onClick={adminDialog} >
         Admin User
       </LoginButton>
       <LoginButton onClick={userDialog}>
         Normal User
       </LoginButton>
       <LoginDialog  open={open} setOpen={setOpen} />
+        </>
+      )
+     }
     </Wapper>
   )
 }
