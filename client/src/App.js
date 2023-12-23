@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React,{useContext, useState} from 'react'
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -7,10 +7,11 @@ import UserDashboard from './components/user/UserDashboard';
 import  { DataContext } from './components/context/DataProvider';
 const App = () => {
   const {account,setAccount}=useContext(DataContext)
+  const [searchInput,setSearchInput]=useState("");
   return (
     <div>
       <Router>
-        <Header />
+        <Header  setSearchInput={setSearchInput} />
         <Routes>
           {
             
@@ -23,7 +24,7 @@ const App = () => {
                   account.userType=="user" && <Route path='/user/dashboard' element={<UserDashboard />} />
                 }
               </>
-            ) : (<Route path='/' element={<Home />} />)
+            ) : (<Route path='/' element={<Home searchInput={searchInput} />} />)
           }
 
 <Route path='/admin/dashboard' element={<AdminDashboard />} />

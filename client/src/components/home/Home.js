@@ -1,10 +1,10 @@
 import React from 'react'
 import MoviesList from './MoviesList';
 
-const Home = () => {
+const Home = ({searchInput}) => {
   return (
     <div style={{marginTop:"75px"}}>
-      <MoviesList />
+      <MoviesList searchInput={searchInput} />
     </div>
   )
 }
