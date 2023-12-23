@@ -7,7 +7,7 @@ const Header = () => {
     <AppBar style={{background:"rgb(29,69,107)"}}>
         <Toolbar>
             <MovieIcon />
-            <Typography>
+            <Typography style={{fontSize: "25px", textAlign: "center" }} >
                 Movies App
             </Typography>
             <CustomButton />
