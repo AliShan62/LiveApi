@@ -12,7 +12,7 @@ const MoviesCard = ({ item }) => {
                     Release Date:  {item.releaseDate}
                 </Typography>
                 <Typography  style={{fontSize:"14px",marginTop:"5px",color: "green"}} >
-                    Genres: {item.genres}
+                    Genres: {item.genres[0]}
                 </Typography>
                 <Typography style={{fontSize:"14px",marginTop:"5px",color: "green"}} >
                     IMDB Rating: {item.imdbRating}
