@@ -10,7 +10,7 @@ app.use(cors())
 app.use("/",router);
 
 const PORT=8000;
-const db_url="mongodb+srv://rraj58361:1234567890@cluster0.gtglraw.mongodb.net/?retryWrites=true&w=majority";
+const db_url="mongodb+srv://alishanit62:ALI786ALI@cluster0.leczp.mongodb.net/LiveApi";  
 connection(db_url);
 app.listen(PORT,()=>{
     console.log(`Server is running at PORT ${PORT}`)
